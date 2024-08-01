@@ -5,13 +5,13 @@ Welcome aboard fellow developer, this is where you will find simple article mana
 
 ### Instructions.
  - Clone the repository from GitHub to your local one
- - Open terminal in VSCode and install dependencies with 
+ - Open terminal in VSCode, navigate to client folder and install dependencies with 
   ### `npm install`
- - Open console for the app, navigate to client folder with `cd client` and write:
+ - Run the app, with:
   ### `npm run dev`
-   to start the app in your browser
- - Open console for the server, navigate to server folder with `cd server` and write:
+ - Open new console, navigate to server folder with `cd server` and write:
   ### `node server.js`
+  to start the server
 
 
 # React + Vite

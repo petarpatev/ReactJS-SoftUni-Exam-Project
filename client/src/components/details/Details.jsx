@@ -88,7 +88,7 @@ export default function Details() {
                 }
             </div>
 
-            {!isOwner && <CommentForm articleId={articleID} onAddComment={onAddComment} />}
+            {(!isOwner && user) && <CommentForm articleId={articleID} onAddComment={onAddComment} />}
 
         </section>
     )

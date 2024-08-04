@@ -50,7 +50,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path='/login' element={<RouteGuardPublic><Login /></RouteGuardPublic>} />
               <Route path='/register' element={<RouteGuardPublic><Register /></RouteGuardPublic>} />
-              <Route path='/logout' element={<RouteGuardPublic><Logout /></RouteGuardPublic>} />
+              <Route path='/logout' element={<RouteGuardPrivate><Logout /></RouteGuardPrivate>} />
               <Route path="/catalog/articles" element={<Catalog />} />
               <Route path="/create" element={<RouteGuardPrivate><Create /></RouteGuardPrivate>} />
               <Route path="/articles/:articleID" element={<ArticleProvider>

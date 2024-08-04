@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { userContext } from "../../contexts/user";
 
 import * as authService from '../../api/auth'
-import { isValid } from "../../utils/validation";
+import { isValid, equalPasswords } from "../../utils/validation";
 
 
 export default function Register() {
@@ -17,6 +17,8 @@ export default function Register() {
         ['confirm-password']: ''
     })
 
+    // const [error, setError] = useState('');
+
     const regValuesChangeHandler = (e) => {
         e.preventDefault();
         setRegisterValues(state => ({
@@ -27,13 +29,26 @@ export default function Register() {
 
     const registerSubmitHandler = async (e) => {
         e.preventDefault();
-        if (isValid(registerValues)) {
+        if (!isValid(registerValues)) {
+            alert("All fields are required");
+            // setError('All fields are required');
+            return;
+        }
+        if (!equalPasswords(registerValues.password, registerValues["confirm-password"])) {
+            alert("Password don't match")
+            // setError("Password don't match");
+            return;
+        }
+        try {
             const user = await authService.register(registerValues.email, registerValues.password);
             setUserWrapper(user);
             e.target.reset();
+            // setError('');
             navigate('/');
-        } else {
-            alert('All fields are required')
+        } catch (err) {
+            console.log(err.message);
+            // setError("Registration failed. Please try again");
+            // navigate('/register');
         }
     }
 
@@ -42,6 +57,7 @@ export default function Register() {
             <form onSubmit={registerSubmitHandler} id="register">
                 <div className="container">
                     <h1>Register</h1>
+                    {/* {error && <div>{error}</div>} */}
                     <label htmlFor="email">Email:</label>
                     <input
                         type="email"

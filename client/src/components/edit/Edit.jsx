@@ -61,7 +61,7 @@ export default function Edit() {
     }
 
     return (
-        <section id="edit-page" className="auth">
+        <section id="edit-article-page" className="auth">
             <form onSubmit={submitHandler} id="edit">
                 <div className="container">
                     <h1>Edit Article</h1>

@@ -21,7 +21,7 @@ export default function Catalog() {
     }, [])
 
     return (
-        <section id="catalog-page">
+        <section id="articles-catalog-page">
             <h1>All Articles</h1>
             {articles.length > 0
                 ? articles.map(article => <Article key={article._id} article={article} />)

@@ -71,13 +71,13 @@ input::placeholder {
 };
 
 
-label[for="female"] {
+label[htmlFor="female"] {
     margin-top: 10px;
 }
 
-input[type="nickname"],
+/* input[type="nickname"], */
 input[type="password"],
-input[type="number"],
+/* input[type="number"], */
 input[type="email"] {
     background: #ecf0f3;
     padding: 30px;
@@ -89,9 +89,9 @@ input[type="email"] {
     box-shadow: inset 6px 6px 6px #c0c2c5, inset -6px -6px 6px white;
 }
 
-label[for="terms"]>input {
+/* label[htmlFor="terms"]>input {
     display: inline;
-}
+} */
 
 .btn.submit {
     margin-top: 30px;
@@ -111,12 +111,12 @@ label[for="terms"]>input {
     background-color: #8fa9b9;
 }
 
-.container {
+/* .container {
     text-align: left;
     margin-top: 0px;
-}
+} */
 
-.field>span {
+/* .field>span {
     position: absolute;
     font-size: 18px;
     bottom: 17px;
@@ -126,4 +126,4 @@ label[for="terms"]>input {
     background: rgb(235, 157, 142);
     border-radius: 10px;
     padding: 5px;
-}
+} */

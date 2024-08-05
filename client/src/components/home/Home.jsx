@@ -20,8 +20,8 @@ export default function Home() {
     }, [])
 
     return (
-        <section id="welcome-world">
-            <div className="welcome-message">
+        <section id="home-main">
+            <div className="home-main-title">
                 <h2>Be creator of your own feature</h2>
                 <h3>Create article</h3>
             </div>

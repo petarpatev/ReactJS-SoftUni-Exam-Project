@@ -5,7 +5,7 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .auth {
@@ -31,12 +31,12 @@ header {
     padding: 10px;
 }
 
-header h1 {
+/* header h1 {
     display: inline-block;
     background-color: #eb8e69;
     color: white;
     margin-bottom: auto;
-}
+} */
 
 header nav {
     font-size: auto;
@@ -50,13 +50,13 @@ header nav>* {
     float: left;
 }
 
-footer {
+/* footer {
     padding: 0.5em;
     width: 100%;
     position: absolute;
     left: 0;
     bottom: 0;
-}
+} */
 
 nav a {
     margin: 0 0.5em;

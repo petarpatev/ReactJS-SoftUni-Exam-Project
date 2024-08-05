@@ -64,11 +64,11 @@ export default function Details() {
     }
 
     return (
-        <section id="game-details">
+        <section id="article-details">
             <h1>Article Details</h1>
             <div className="info-section">
-                <div className="game-header">
-                    <img className="game-img" src="../../images/default-article-image.jpg" alt={article.title} />
+                <div className="article-header">
+                    <img className="article-img" src="../../images/default-article-image.jpg" alt={article.title} />
                     <h1>{article.title}</h1>
                     <span className="levels">{article.author}</span>
                     {/* <p className="type">{article.author}</p> */}

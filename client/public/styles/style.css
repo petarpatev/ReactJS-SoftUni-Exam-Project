@@ -1,8 +1,8 @@
 @import "typography.css";
-@import "details.css";
-@import "login-register.css";
-@import "create-edit.css";
-@import "welcome.css";
-@import "all-games.css";
+@import "details-article.css";
+@import "login-register-article.css";
+@import "create-edit-article.css";
+@import "home.css";
+@import "articles.css";
 @import "navigation.css";
 @import "comments.css";

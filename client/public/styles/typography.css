@@ -51,7 +51,7 @@ a {
     color: inherit;
 }
 
-blockquote {
+/* blockquote {
     font-style: italic;
     margin: 0.5em;
 }
@@ -61,4 +61,4 @@ blockquote>cite {
     text-align: right;
     margin: 0.5em 2em;
     font-weight: bold;
-}
+} */

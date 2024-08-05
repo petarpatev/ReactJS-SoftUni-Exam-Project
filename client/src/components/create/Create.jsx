@@ -40,7 +40,7 @@ export default function Create() {
     }
 
     return (
-        <section id="create-page" className="auth">
+        <section id="create-article-page" className="auth">
             <form onSubmit={submitHandler} id="create">
                 <div className="container">
                     <h1>Create Article</h1>

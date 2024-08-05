@@ -46,7 +46,8 @@ export default function Register() {
             // setError('');
             navigate('/');
         } catch (err) {
-            console.log(err.message);
+            console.error("Registration failed:", err);
+            alert("Registration failed! Please try again");
             // setError("Registration failed. Please try again");
             // navigate('/register');
         }

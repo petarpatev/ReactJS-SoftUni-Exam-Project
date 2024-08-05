@@ -9,8 +9,13 @@ export default function Home() {
 
     useEffect(() => {
         (async () => {
-            const latestArticles = await articleService.getLatestThree();
-            setLatestArticles(latestArticles);
+            try {
+                const latestArticles = await articleService.getLatestThree();
+                setLatestArticles(latestArticles);
+            } catch (err) {
+                console.error("Error fetching latest games:", err);
+                alert("Failed to load the latest games! Please try again!");
+            }
         })()
     }, [])
 

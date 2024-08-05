@@ -10,8 +10,13 @@ export default function Catalog() {
 
     useEffect(() => {
         (async () => {
-            const articles = await articleService.getAll();
-            setArticles(articles.reverse())
+            try {
+                const articles = await articleService.getAll();
+                setArticles(articles.reverse());
+            } catch (err) {
+                console.error("Error fetching all articles:", err);
+                alert("Failed to load all articles! Please try again!");
+            }
         })()
     }, [])
 

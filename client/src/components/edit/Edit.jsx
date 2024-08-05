@@ -26,8 +26,13 @@ export default function Edit() {
             })
         } else {
             (async () => {
-                const selectedArticle = await articleService.getOne(articleID);
-                setArticleWrapper(selectedArticle);
+                try {
+                    const selectedArticle = await articleService.getOne(articleID);
+                    setArticleWrapper(selectedArticle);
+                } catch (err) {
+                    console.error("Error fetching article:", err);
+                    alert("Failed to load the article! Please try again!");
+                }
             })()
         }
     }, [article]);
@@ -42,9 +47,14 @@ export default function Edit() {
     const submitHandler = async (e) => {
         e.preventDefault();
         if (isValid(editValues)) {
-            const editedArticle = await articleService.edit(articleID, editValues);
-            e.target.reset();
-            navigate(`/articles/${editedArticle._id}`);
+            try {
+                const editedArticle = await articleService.edit(articleID, editValues);
+                e.target.reset();
+                navigate(`/articles/${editedArticle._id}`);
+            } catch (err) {
+                console.error("Error editing article:", err);
+                alert("Failed to edit the article! Please try again!");
+            }
         } else {
             alert("All fields are required");
         }

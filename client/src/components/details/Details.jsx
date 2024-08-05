@@ -21,15 +21,21 @@ export default function Details() {
 
     useEffect(() => {
         (async () => {
-            const [selectedArticle, comments] = await Promise.all([
-                articleService.getOne(articleID),
-                commentService.getByArticleId(articleID)
-            ])
-            setArticleWrapper(selectedArticle);
-            setComments(comments);
-            if (user && selectedArticle) {
-                setIsOwner(user._id === selectedArticle._ownerId);
+            try {
+                const [selectedArticle, comments] = await Promise.all([
+                    articleService.getOne(articleID),
+                    commentService.getByArticleId(articleID)
+                ])
+                setArticleWrapper(selectedArticle);
+                setComments(comments);
+                if (user && selectedArticle) {
+                    setIsOwner(user._id === selectedArticle._ownerId);
+                }
+            } catch (err) {
+                console.error("Error fetching article details:", err);
+                alert("Failed to load article details! Please try again!");
             }
+
         })()
     }, [articleID, user])
 
@@ -47,8 +53,13 @@ export default function Details() {
     async function deleteHandler() {
         const choice = confirm('Are you sure you want to delete this article?');
         if (choice) {
-            await articleService.remove(article._id);
-            navigate('/');
+            try {
+                await articleService.remove(article._id);
+                navigate('/');
+            } catch (err) {
+                console.error("Error deleting article:", err);
+                alert("Failed to delete the article! Please try again!");
+            }
         }
     }
 

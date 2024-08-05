@@ -21,19 +21,24 @@ export default function CommentForm({ articleId, onAddComment }) {
 
     const submitHandler = async (e) => {
         e.preventDefault();
-        const newComment = await commentService.create({
-            articleId: articleId,
-            comment: commentValues.comment,
-            author: user.email
-        })
+        try {
+            const newComment = await commentService.create({
+                articleId: articleId,
+                comment: commentValues.comment,
+                author: user.email
+            })
 
-        onAddComment(newComment);
-        e.target.reset();
-        setCommentValues(state => ({
-            ...state,
-            comment: "",
-            author: ""
-        }))
+            onAddComment(newComment);
+            e.target.reset();
+            setCommentValues(state => ({
+                ...state,
+                comment: "",
+                author: ""
+            }))
+        } catch (err) {
+            console.error("Failed to create comment:", err);
+            alert("Failed to create comment! Please try again!");
+        }
     }
 
     return (

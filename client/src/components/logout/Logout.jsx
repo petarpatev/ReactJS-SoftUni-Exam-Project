@@ -9,9 +9,14 @@ export default function Logout() {
     const { setUserWrapper } = useContext(userContext);
     useEffect(() => {
         (async () => {
-            authService.logout();
-            setUserWrapper(null);
-            navigate('/');
+            try {
+                authService.logout();
+                setUserWrapper(null);
+                navigate('/');
+            } catch (err) {
+                console.error("Failed to logout:", err);
+                alert("Failed to logout! Please try again");
+            }
         })()
     }, [])
 }

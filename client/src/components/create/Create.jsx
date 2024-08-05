@@ -25,9 +25,14 @@ export default function Create() {
         e.preventDefault();
 
         if (isValid(createValues)) {
-            await articleService.create(createValues);
-            e.target.reset();
-            navigate('/catalog/articles');
+            try {
+                await articleService.create(createValues);
+                e.target.reset();
+                navigate('/catalog/articles');
+            } catch (err) {
+                console.log(err);
+                alert("Game creation failed! Please try again");
+            }
         } else {
             alert("All fields are requeired")
         }

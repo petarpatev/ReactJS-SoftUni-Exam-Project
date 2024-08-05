@@ -27,10 +27,15 @@ export default function Login() {
     const loginSubmitHandler = async (e) => {
         e.preventDefault();
         if (isValid(loginValues)) {
-            const user = await authService.login(loginValues.email, loginValues.password);
-            setUserWrapper(user);
-            e.target.reset();
-            navigate('/');
+            try {
+                const user = await authService.login(loginValues.email, loginValues.password);
+                setUserWrapper(user);
+                e.target.reset();
+                navigate('/');
+            } catch (err) {
+                console.error("Login failed:", err);
+                alert("Failed to logged-in! Please try again");
+            }
         } else {
             alert('All fields are required')
         }

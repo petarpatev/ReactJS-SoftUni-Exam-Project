@@ -1,6 +1,7 @@
 import { useState, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { userContext } from "../../contexts/user";
+import { membersContext } from "../../contexts/members"
 
 import * as authService from '../../api/auth'
 import { isValid, equalPasswords } from "../../utils/validation";
@@ -10,9 +11,11 @@ export default function Register() {
 
     const navigate = useNavigate();
     const { setUserWrapper } = useContext(userContext);
+    const { members, setMembersWrapper } = useContext(membersContext);
 
     const [registerValues, setRegisterValues] = useState({
         email: '',
+        // username: '',
         password: '',
         ['confirm-password']: ''
     })
@@ -42,6 +45,7 @@ export default function Register() {
         try {
             const user = await authService.register(registerValues.email, registerValues.password);
             setUserWrapper(user);
+            setMembersWrapper(user);
             e.target.reset();
             // setError('');
             navigate('/');
@@ -67,6 +71,14 @@ export default function Register() {
                         onChange={regValuesChangeHandler}
                         value={registerValues.email}
                     />
+                    {/* <label htmlFor="username">Username:</label>
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        onChange={regValuesChangeHandler}
+                        value={registerValues.username}
+                    /> */}
                     <label htmlFor="password">Password:</label>
                     <input type="password"
                         name="password"
@@ -79,7 +91,7 @@ export default function Register() {
                         name="confirm-password"
                         id="confirm-password"
                         onChange={regValuesChangeHandler}
-                        value={registerValues.confirmPassword}
+                        value={registerValues["confirm-password"]}
                     />
                     <input className="btn submit" type="submit" value="Register" />
                 </div>

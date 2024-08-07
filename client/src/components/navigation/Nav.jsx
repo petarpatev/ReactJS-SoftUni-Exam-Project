@@ -15,6 +15,7 @@ export default function Navigation() {
             </h1>
             <nav>
                 {user ? <span style={{ marginRight: "10px", fontStyle: "Italic"}}>{user.email}</span> : <span style={{ marginRight: "10px", fontStyle: "Italic" }}>Guest</span>}
+                <Link to="/members">Members</Link>
                 <Link to="/catalog/articles">Articles</Link>
                 {user
                     ? <div id="user">

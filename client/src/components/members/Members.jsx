@@ -1,6 +1,8 @@
 import { useContext } from "react"
 import { membersContext } from "../../contexts/members"
 
+import MemberCard from "../member-card/memberCard";
+
 
 export default function Members() {
 
@@ -11,7 +13,7 @@ export default function Members() {
             <h1>Users:</h1>
 
             <ul>
-                {members.map(x => <li key={x._id}>{x.email}</li>)}
+                {members.map(x => <MemberCard key={x._id} member={x} />)}
             </ul>
         </>
     )

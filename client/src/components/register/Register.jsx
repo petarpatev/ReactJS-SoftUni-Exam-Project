@@ -45,7 +45,11 @@ export default function Register() {
         try {
             const user = await authService.register(registerValues.email, registerValues.password);
             setUserWrapper(user);
-            setMembersWrapper(user);
+            setMembersWrapper({
+                email: registerValues.email,
+                username: registerValues.username,
+                _id: user._id
+            });
             e.target.reset();
             // setError('');
             navigate('/');
@@ -71,14 +75,14 @@ export default function Register() {
                         onChange={regValuesChangeHandler}
                         value={registerValues.email}
                     />
-                    {/* <label htmlFor="username">Username:</label>
+                    <label htmlFor="username">Username:</label>
                     <input
                         type="text"
                         id="username"
                         name="username"
                         onChange={regValuesChangeHandler}
                         value={registerValues.username}
-                    /> */}
+                    />
                     <label htmlFor="password">Password:</label>
                     <input type="password"
                         name="password"

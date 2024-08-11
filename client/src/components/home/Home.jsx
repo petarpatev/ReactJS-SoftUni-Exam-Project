@@ -25,7 +25,7 @@ export default function Home() {
                 <h2>Be creator of your own feature</h2>
                 <h3>Create article</h3>
             </div>
-            <img src="public/images/articlewall.jpg" alt="hero" />
+            {/* <img src="public/images/articlewall.jpg" alt="hero" /> */}
             <div id="home-page">
                 <h1>Latest Articles</h1>
                 {latestArticles.length > 0

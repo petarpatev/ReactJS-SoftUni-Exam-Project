@@ -1,10 +1,7 @@
 import { Routes, Route } from "react-router-dom"
-import { userContext } from "./contexts/user"
+import { UserProvider } from "./contexts/user"
 import { ArticleProvider } from "./contexts/article"
 import { MembersProvider } from "./contexts/members"
-import { useEffect, useState } from "react"
-
-import * as utilsService from "./utils/user"
 
 import Login from "./components/login/Login"
 import Navigation from "./components/navigation/Nav"
@@ -23,27 +20,9 @@ import RouteGuardPublic from "./components/common/RouteGuardPublic"
 
 function App() {
 
-  const [user, setUser] = useState(() => {
-    const savedUser = utilsService.getUserData();
-    return savedUser ? savedUser : null;
-  });
-
-  const setUserWrapper = (data) => {
-    setUser(data)
-  }
-
-  useEffect(() => {
-    if (user) {
-      utilsService.setUserData(user);
-    } else {
-      utilsService.clearUserData();
-    }
-  }, [user])
-
-
   return (
     <>
-      <userContext.Provider value={{ user, setUserWrapper }}>
+      <UserProvider>
         <MembersProvider>
           <div id="box">
 
@@ -69,7 +48,7 @@ function App() {
 
           </div>
         </MembersProvider>
-      </userContext.Provider>
+      </UserProvider>
     </>
   )
 }

@@ -11,11 +11,11 @@ export default function Register() {
 
     const navigate = useNavigate();
     const { setUserWrapper } = useContext(userContext);
-    const { members, setMembersWrapper } = useContext(membersContext);
+    const { setMembersWrapper } = useContext(membersContext);
 
     const [registerValues, setRegisterValues] = useState({
         email: '',
-        // username: '',
+        username: '',
         password: '',
         ['confirm-password']: ''
     })

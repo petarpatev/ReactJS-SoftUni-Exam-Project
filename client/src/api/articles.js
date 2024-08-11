@@ -2,7 +2,7 @@ import * as apiService from "./requester"
 
 const endpoints = {
     getAll: '/data/articles',
-    getLatestThree: '/data/articles?sortBy=_createdOn%20desc&distinct=_createdOn',
+    getLatestThree: '/data/articles?sortBy=_createdOn%20desc&pageSize=3',
     create: '/data/articles',
     edit: '/data/articles/',
     remove: '/data/articles/',

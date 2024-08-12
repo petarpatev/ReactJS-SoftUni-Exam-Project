@@ -23,15 +23,6 @@
     width: auto
 }
 
-/* #home-main>img {
-    height: auto;
-    display: inline-block;
-    vertical-align: middle;
-    max-width: 70%;
-    margin-left: auto;
-    padding-left: auto;
-} */
-
 .home-main-title h2 {
     color: #ffffff;
     font-size: 300%;
@@ -123,23 +114,6 @@
     font-weight: 700;
     line-height: normal;
 }
-
-/* .rating {
-    unicode-bidi: bidi-override;
-    text-align: center;
-    direction: rtl;
-}
-
-.rating span {
-    font-size: 40px;
-    padding: 4px;
-}
-
-.rating span:before {
-    content: "\2605";
-    position: absolute;
-    color: gold;
-} */
 
 .details-btn {
     background-color: #b6a198;

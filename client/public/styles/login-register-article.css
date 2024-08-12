@@ -24,15 +24,6 @@
     padding: 40px;
 }
 
-/* .brand-logo {
-    height: 100px;
-    width: 100px;
-    margin: auto;
-    border-radius: 50%;
-    box-sizing: border-box;
-    box-shadow: 7px 7px 10px #cbced1, -7px -7px 10px white;
-} */
-
 .container>h1 {
     margin-top: 15px;
     font-weight: 900;
@@ -89,10 +80,6 @@ input[type="email"] {
     box-shadow: inset 6px 6px 6px #c0c2c5, inset -6px -6px 6px white;
 }
 
-/* label[htmlFor="terms"]>input {
-    display: inline;
-} */
-
 .btn.submit {
     margin-top: 30px;
     background: #b6a198;
@@ -110,20 +97,3 @@ input[type="email"] {
     color: white;
     background-color: rgb(82, 133, 139);
 }
-
-/* .container {
-    text-align: left;
-    margin-top: 0px;
-} */
-
-/* .field>span {
-    position: absolute;
-    font-size: 18px;
-    bottom: 17px;
-    right: 8px;
-    text-decoration: none;
-    color: black;
-    background: rgb(235, 157, 142);
-    border-radius: 10px;
-    padding: 5px;
-} */

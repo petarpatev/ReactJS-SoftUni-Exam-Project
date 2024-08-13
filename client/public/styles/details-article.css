@@ -35,7 +35,7 @@
 }
 
 
-.levels {
+.article-author {
     display: inline-block;
     margin-top: 15px;
     color: #555;
@@ -87,5 +87,14 @@
 .button:hover {
     background-color: rgb(82, 133, 139);
     color: white;
+}
+
+.likeBtn {
+    font-size: 20px;
+    margin-left: 20px;
+    padding: 6px 16px;
+    background-color: rgba(31, 120, 192, 0.993);
+    color: white;
+    cursor: pointer;
 }
 

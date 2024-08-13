@@ -5,6 +5,7 @@ import { articleContext } from "../../contexts/article";
 
 import * as articleService from "../../api/articles"
 import * as commentService from "../../api/comments"
+import * as likeService from "../../api/likes"
 
 import CommentForm from "../comments/CommentForm";
 
@@ -17,19 +18,24 @@ export default function Details() {
 
     const articleID = useParams().articleID;
     const [isOwner, setIsOwner] = useState(false);
+    const [isLikedByUser, setIsLikedByUser] = useState(false);
     const [comments, setComments] = useState([]);
+    const [likes, setLikes] = useState([]);
 
     useEffect(() => {
         (async () => {
             try {
-                const [selectedArticle, comments] = await Promise.all([
+                const [selectedArticle, comments, likes] = await Promise.all([
                     articleService.getOne(articleID),
-                    commentService.getByArticleId(articleID)
+                    commentService.getByArticleId(articleID),
+                    likeService.getByArticleId(articleID)
                 ])
                 setArticleWrapper(selectedArticle);
                 setComments(comments);
+                setLikes(likes);
                 if (user && selectedArticle) {
                     setIsOwner(user._id === selectedArticle._ownerId);
+                    setIsLikedByUser(likes.some(like => like._ownerId === user._id));
                 }
             } catch (err) {
                 console.error("Error fetching article details:", err);
@@ -48,6 +54,26 @@ export default function Details() {
             ...state,
             newComment
         ]))
+    }
+
+    async function onClickLike(e) {
+        e.preventDefault();
+        if (!isLikedByUser) {
+            try {
+                const newLike = {
+                    articleId: articleID,
+                }
+                await likeService.create(newLike);
+                setLikes(state => ([
+                    ...state,
+                    newLike
+                ]))
+                setIsLikedByUser(true);
+            } catch (err) {
+                console.error("Error liking article:", err);
+                alert("Failed to like the article! Please try again.");
+            }
+        }
     }
 
     async function deleteHandler() {
@@ -70,10 +96,11 @@ export default function Details() {
                 <div className="article-header">
                     <img className="article-img" src="../../images/default-article-image.jpg" alt={article.title} />
                     <h1>{article.title}</h1>
-                    <span className="levels">{article.author}</span>
-                    {/* <p className="type">{article.author}</p> */}
+                    <span className="article-author">{article.author}</span>
+                    {(!isOwner && user) && <button onClick={onClickLike} className="likeBtn">Like</button>}
                 </div>
                 <p className="text">{article.content}</p>
+                <span>Likes: {likes.length}</span>
 
                 <div className="details-comments">
                     <h2>Comments:</h2>

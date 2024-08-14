@@ -15,6 +15,7 @@ import Details from "./components/details/Details"
 import Edit from "./components/edit/Edit"
 import RouteGuardPrivate from "./components/common/RouteGuardPrivate"
 import RouteGuardPublic from "./components/common/RouteGuardPublic"
+import MemberDetailsCard from "./components/member-card/memberDetailCard"
 
 
 
@@ -32,6 +33,7 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/members" element={<Members />} />
+                <Route path="/members/:memberId" element={<MemberDetailsCard />} />
                 <Route path='/login' element={<RouteGuardPublic><Login /></RouteGuardPublic>} />
                 <Route path='/register' element={<RouteGuardPublic><Register /></RouteGuardPublic>} />
                 <Route path='/logout' element={<RouteGuardPrivate><Logout /></RouteGuardPrivate>} />

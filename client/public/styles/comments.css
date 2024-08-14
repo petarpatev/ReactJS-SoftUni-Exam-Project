@@ -54,3 +54,17 @@
     color: white;
     cursor: pointer;
 }
+
+.member-details-comment {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    position: static;
+    margin: 20px auto 25px auto;
+    padding: 5px;
+    box-shadow: 8px 8px 8px 0 rgba(0, 0, 0, 0.2), 12px 12px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 16px;
+    margin-left: 60px;
+    background: #b7b2c5;
+    color: white;
+}

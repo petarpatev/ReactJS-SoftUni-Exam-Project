@@ -13,7 +13,7 @@ export default function Details() {
 
     const navigate = useNavigate();
 
-    const { user } = useContext(userContext);
+    const { user, setUserWrapper } = useContext(userContext);
     const { article, setArticleWrapper } = useContext(articleContext);
 
     const articleID = useParams().articleID;
@@ -99,8 +99,8 @@ export default function Details() {
                     <span className="article-author">{article.author}</span>
                     {(!isOwner && user) && <button onClick={onClickLike} className="likeBtn">Like</button>}
                 </div>
+                <span className="article-likes">Likes: {likes.length}</span>
                 <p className="text">{article.content}</p>
-                <span>Likes: {likes.length}</span>
 
                 <div className="details-comments">
                     <h2>Comments:</h2>

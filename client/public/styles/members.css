@@ -27,3 +27,25 @@
     margin: 0;
     color: hsl(0, 0%, 30%);
 }
+
+.member-card-btn {
+    background-color: rgba(108, 209, 240, 0.589);
+    color: white;
+    margin-left: 65%;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.member-likes {
+    background-color: #b7b2c5;
+    color: white;
+    border-radius: 6px;
+    padding: 10px;
+    margin: 100px;
+    text-align: center;
+}
+
+.member-comments-wrapper {
+    display: flex;
+    justify-content: center;
+}

@@ -10,7 +10,7 @@ export default function Members() {
 
     return (
         <>
-            <h1>Users:</h1>
+            <h1>Registered users:</h1>
 
             <ul>
                 {members.map(x => <MemberCard key={x._id} member={x} />)}

@@ -1,12 +1,17 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
 import { useNavigate } from "react-router-dom";
+import { modalContext } from "../../contexts/modal";
 
 import * as articleService from "../../api/articles"
 import { isValid } from "../../utils/validation";
 
+import Modal from "../modal/Modal";
+
 export default function Create() {
 
     const navigate = useNavigate();
+    const { isOpen, setIsOpenWrapper } = useContext(modalContext);
+    const [error, setError] = useState('');
 
     const [createValues, setCreateValues] = useState({
         title: '',
@@ -28,19 +33,23 @@ export default function Create() {
             try {
                 await articleService.create(createValues);
                 e.target.reset();
+                setError('');
                 navigate('/catalog/articles');
             } catch (err) {
                 console.log(err);
-                alert("Game creation failed! Please try again");
+                setError('Game creation failed! Please try again');
+                setIsOpenWrapper(true);
             }
         } else {
-            alert("All fields are requeired")
+            setError('All fields are required');
+            setIsOpenWrapper(true);
         }
 
     }
 
     return (
         <section id="create-article-page" className="auth">
+            {isOpen && <Modal setIsOpen={setIsOpenWrapper} errMessage={error} />}
             <form onSubmit={submitHandler} id="create">
                 <div className="container">
                     <h1>Create Article</h1>

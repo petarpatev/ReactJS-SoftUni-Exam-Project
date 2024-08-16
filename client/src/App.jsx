@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom"
 import { UserProvider } from "./contexts/user"
 import { ArticleProvider } from "./contexts/article"
 import { MembersProvider } from "./contexts/members"
+import { ModalProvider } from "./contexts/modal"
 
 import Login from "./components/login/Login"
 import Navigation from "./components/navigation/Nav"
@@ -23,34 +24,36 @@ function App() {
 
   return (
     <>
-      <UserProvider>
-        <MembersProvider>
-          <div id="box">
+      <ModalProvider>
+        <UserProvider>
+          <MembersProvider>
+            <div id="box">
 
-            <Navigation />
+              <Navigation />
 
-            <main id="main-content">
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/members" element={<Members />} />
-                <Route path="/members/:memberId" element={<MemberDetailsCard />} />
-                <Route path='/login' element={<RouteGuardPublic><Login /></RouteGuardPublic>} />
-                <Route path='/register' element={<RouteGuardPublic><Register /></RouteGuardPublic>} />
-                <Route path='/logout' element={<RouteGuardPrivate><Logout /></RouteGuardPrivate>} />
-                <Route path="/catalog/articles" element={<Catalog />} />
-                <Route path="/create" element={<RouteGuardPrivate><Create /></RouteGuardPrivate>} />
-                <Route path="/articles/:articleID" element={<ArticleProvider>
-                  <Details />
-                </ArticleProvider>} />
-                <Route path="/articles/:articleID/edit" element={<ArticleProvider>
-                  <RouteGuardPrivate><Edit /></RouteGuardPrivate>
-                </ArticleProvider>} />
-              </Routes>
-            </main>
+              <main id="main-content">
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/members" element={<Members />} />
+                  <Route path="/members/:memberId" element={<MemberDetailsCard />} />
+                  <Route path='/login' element={<RouteGuardPublic><Login /></RouteGuardPublic>} />
+                  <Route path='/register' element={<RouteGuardPublic><Register /></RouteGuardPublic>} />
+                  <Route path='/logout' element={<RouteGuardPrivate><Logout /></RouteGuardPrivate>} />
+                  <Route path="/catalog/articles" element={<Catalog />} />
+                  <Route path="/create" element={<RouteGuardPrivate><Create /></RouteGuardPrivate>} />
+                  <Route path="/articles/:articleID" element={<ArticleProvider>
+                    <Details />
+                  </ArticleProvider>} />
+                  <Route path="/articles/:articleID/edit" element={<ArticleProvider>
+                    <RouteGuardPrivate><Edit /></RouteGuardPrivate>
+                  </ArticleProvider>} />
+                </Routes>
+              </main>
 
-          </div>
-        </MembersProvider>
-      </UserProvider>
+            </div>
+          </MembersProvider>
+        </UserProvider>
+      </ModalProvider>
     </>
   )
 }

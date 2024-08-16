@@ -1,16 +1,20 @@
 import { useState, useContext } from "react"
 import { userContext } from "../../contexts/user"
+import { modalContext } from "../../contexts/modal";
 
 import * as commentService from "../../api/comments"
 import { isValid } from "../../utils/validation";
 
+import Modal from "../modal/Modal";
+
 export default function CommentForm({ articleId, onAddComment }) {
 
     const { user } = useContext(userContext);
+    const {isOpen, setIsOpenWrapper} = useContext(modalContext);
+    const [error, setError] = useState('');
 
     const [commentValues, setCommentValues] = useState({
         comment: '',
-        // author: ''
     })
 
     const changeValueHandler = (e) => {
@@ -35,20 +39,23 @@ export default function CommentForm({ articleId, onAddComment }) {
                 setCommentValues(state => ({
                     ...state,
                     comment: "",
-                    // author: ""
                 }))
+                setError('');
             } catch (err) {
                 console.error("Failed to create comment:", err);
-                alert("Failed to create comment! Please try again!");
+                setError("Failed to create comment! Please try again!");
+                setIsOpenWrapper(true)
             }
         } else {
-            alert("All fields are requeired")
+            setError("All fields are requeired");
+            setIsOpenWrapper(true);
         }
 
     }
 
     return (
         <article className="create-comment">
+            {isOpen && <Modal setIsOpen={setIsOpenWrapper} errMessage={error}/>}
             <label>Add new comment:</label>
             <form onSubmit={submitHandler} className="form">
                 <textarea

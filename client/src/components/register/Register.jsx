@@ -2,9 +2,11 @@ import { useState, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 import { userContext } from "../../contexts/user";
 import { membersContext } from "../../contexts/members"
+import { modalContext } from "../../contexts/modal";
 
 import * as authService from '../../api/auth'
 import { isValid, equalPasswords } from "../../utils/validation";
+import Modal from "../modal/Modal";
 
 
 export default function Register() {
@@ -12,6 +14,7 @@ export default function Register() {
     const navigate = useNavigate();
     const { setUserWrapper } = useContext(userContext);
     const { setMembersWrapper } = useContext(membersContext);
+    const {isOpen, setIsOpenWrapper} = useContext(modalContext);
 
     const [registerValues, setRegisterValues] = useState({
         email: '',
@@ -20,7 +23,8 @@ export default function Register() {
         ['confirm-password']: ''
     })
 
-    // const [error, setError] = useState('');
+    const [error, setError] = useState('');
+
 
     const regValuesChangeHandler = (e) => {
         e.preventDefault();
@@ -33,13 +37,13 @@ export default function Register() {
     const registerSubmitHandler = async (e) => {
         e.preventDefault();
         if (!isValid(registerValues)) {
-            alert("All fields are required");
-            // setError('All fields are required');
+            setError('All fields are required');
+            setIsOpenWrapper(true);
             return;
         }
         if (!equalPasswords(registerValues.password, registerValues["confirm-password"])) {
-            alert("Password don't match")
-            // setError("Password don't match");
+            setError("Password don't match");
+            setIsOpenWrapper(true)
             return;
         }
         try {
@@ -51,13 +55,12 @@ export default function Register() {
                 _id: user._id
             });
             e.target.reset();
-            // setError('');
+            setError('');
             navigate('/');
         } catch (err) {
             console.error("Registration failed:", err);
-            alert("Registration failed! Please try again");
-            // setError("Registration failed. Please try again");
-            // navigate('/register');
+            setError("Registration failed. Please try again");
+            setIsOpenWrapper(true)
         }
     }
 
@@ -66,7 +69,7 @@ export default function Register() {
             <form onSubmit={registerSubmitHandler} id="register">
                 <div className="container">
                     <h1>Register</h1>
-                    {/* {error && <div>{error}</div>} */}
+                    {isOpen && <Modal setIsOpen={setIsOpenWrapper} errMessage={error}/>}
                     <label htmlFor="email">Email:</label>
                     <input
                         type="email"

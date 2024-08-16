@@ -1,14 +1,19 @@
 import { useState, useEffect, useContext } from "react"
 import { articleContext } from "../../contexts/article";
+import { modalContext } from "../../contexts/modal";
 import * as articleService from "../../api/articles"
 import { useNavigate, useParams } from "react-router-dom";
 
 import { isValid } from "../../utils/validation";
 
+import Modal from "../modal/Modal";
+
 export default function Edit() {
 
     const articleID = useParams().articleID;
     const navigate = useNavigate();
+    const { isOpen, setIsOpenWrapper } = useContext(modalContext);
+    const [error, setError] = useState('');
 
     const { article, setArticleWrapper } = useContext(articleContext);
     const [editValues, setEditValues] = useState({
@@ -29,9 +34,11 @@ export default function Edit() {
                 try {
                     const selectedArticle = await articleService.getOne(articleID);
                     setArticleWrapper(selectedArticle);
+                    setError('');
                 } catch (err) {
                     console.error("Error fetching article:", err);
-                    alert("Failed to load the article! Please try again!");
+                    setError("Failed to load the article! Please try again!");
+                    setIsOpenWrapper(true);
                 }
             })()
         }
@@ -50,18 +57,22 @@ export default function Edit() {
             try {
                 const editedArticle = await articleService.edit(articleID, editValues);
                 e.target.reset();
+                setError('');
                 navigate(`/articles/${editedArticle._id}`);
             } catch (err) {
                 console.error("Error editing article:", err);
-                alert("Failed to edit the article! Please try again!");
+                setError("Failed to edit the article! Please try again!");
+                setIsOpenWrapper(true);
             }
         } else {
-            alert("All fields are required");
+            setError("All fields are required");
+            setIsOpenWrapper(true);
         }
     }
 
     return (
         <section id="edit-article-page" className="auth">
+            {isOpen && <Modal setIsOpen={setIsOpenWrapper} errMessage={error} />}
             <form onSubmit={submitHandler} id="edit">
                 <div className="container">
                     <h1>Edit Article</h1>

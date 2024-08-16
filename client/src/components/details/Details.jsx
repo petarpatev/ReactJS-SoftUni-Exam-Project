@@ -2,25 +2,29 @@ import { useEffect, useState, useContext } from "react"
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { userContext } from "../../contexts/user";
 import { articleContext } from "../../contexts/article";
+import { modalContext } from "../../contexts/modal";
 
 import * as articleService from "../../api/articles"
 import * as commentService from "../../api/comments"
 import * as likeService from "../../api/likes"
 
 import CommentForm from "../comments/CommentForm";
+import Modal from "../modal/Modal";
 
 export default function Details() {
 
     const navigate = useNavigate();
 
-    const { user, setUserWrapper } = useContext(userContext);
+    const { user } = useContext(userContext);
     const { article, setArticleWrapper } = useContext(articleContext);
+    const { isOpen, setIsOpenWrapper } = useContext(modalContext);
 
     const articleID = useParams().articleID;
     const [isOwner, setIsOwner] = useState(false);
     const [isLikedByUser, setIsLikedByUser] = useState(false);
     const [comments, setComments] = useState([]);
     const [likes, setLikes] = useState([]);
+    const [error, setError] = useState('');
 
     useEffect(() => {
         (async () => {
@@ -37,9 +41,11 @@ export default function Details() {
                     setIsOwner(user._id === selectedArticle._ownerId);
                     setIsLikedByUser(likes.some(like => like._ownerId === user._id));
                 }
+                setError('');
             } catch (err) {
                 console.error("Error fetching article details:", err);
-                alert("Failed to load article details! Please try again!");
+                setError("Failed to load article details! Please try again!");
+                setIsOpenWrapper(true);
             }
 
         })()
@@ -69,9 +75,11 @@ export default function Details() {
                     newLike
                 ]))
                 setIsLikedByUser(true);
+                setError('');
             } catch (err) {
                 console.error("Error liking article:", err);
-                alert("Failed to like the article! Please try again.");
+                setError("Failed to like the article! Please try again.");
+                setIsOpenWrapper(true);
             }
         }
     }
@@ -82,9 +90,11 @@ export default function Details() {
             try {
                 await articleService.remove(article._id);
                 navigate('/');
+                setError('');
             } catch (err) {
                 console.error("Error deleting article:", err);
-                alert("Failed to delete the article! Please try again!");
+                setError("Failed to delete the article! Please try again!");
+                setIsOpenWrapper(true);
             }
         }
     }
@@ -92,6 +102,7 @@ export default function Details() {
     return (
         <section id="article-details">
             <h1>Article Details</h1>
+            {isOpen && <Modal setIsOpen={setIsOpenWrapper} errMessage={error} />}
             <div className="info-section">
                 <div className="article-header">
                     <img className="article-img" src="../../images/default-article-image.jpg" alt={article.title} />

@@ -1,6 +1,7 @@
 .member-card {
     border: 1px solid hsl(0, 0%, 80%);
     border-radius: 10px;
+    background-color: #e1375836;
     box-shadow: 5px 5px 5px hsl(0, 0%, 0%, 0.1);
     padding: 20px;
     margin: 20px;

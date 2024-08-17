@@ -5,7 +5,7 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .auth {
@@ -15,7 +15,7 @@ body {
 
 header,
 footer {
-    background-color: #b6a198;
+    background-color: #e1375836;
     width: 100%;
     overflow: hidden;
     color: white;
@@ -23,7 +23,6 @@ footer {
 
 .home {
     font-size: auto;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 header {
@@ -33,7 +32,6 @@ header {
 
 header nav {
     font-size: auto;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
     position: absolute;
     right: 0;
     bottom: 8px;
@@ -42,14 +40,6 @@ header nav {
 header nav>* {
     float: left;
 }
-
-/* footer {
-    padding: 0.5em;
-    width: 100%;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-} */
 
 nav a {
     margin: 0 0.5em;

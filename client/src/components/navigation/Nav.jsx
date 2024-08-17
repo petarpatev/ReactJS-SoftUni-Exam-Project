@@ -10,7 +10,7 @@ export default function Navigation() {
         <header>
             <h1>
                 <Link className="home" to="/">
-                    24/7 Articles
+                    Home
                 </Link>
             </h1>
             <nav>

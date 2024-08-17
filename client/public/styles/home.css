@@ -75,7 +75,7 @@
     background-position: right 35% bottom 45%;
     box-sizing: border-box;
     border-radius: 15px;
-    float: left;
+    /* float: left; */
     height: auto;
     color: white;
 }
